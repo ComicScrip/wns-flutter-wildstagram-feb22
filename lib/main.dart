@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/camera.dart';
 import 'package:flutter_application_1/gallery.dart';
+import 'package:flutter_application_1/savedPictures.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,13 +34,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.camera_alt)),
-              Tab(icon: Icon(Icons.collections))
+              Tab(icon: Icon(Icons.collections)),
+              Tab(icon: Icon(Icons.save_outlined))
             ],
           ),
           title: Text('Wildstagram'),
@@ -48,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             CameraScreen(),
             GalleryScreen(),
+            SavedPicturesScreen(),
           ],
         ),
         //floatingActionButton: FloatingActionButton(

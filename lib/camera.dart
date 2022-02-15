@@ -1,6 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/picture.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:path/path.dart';
 
 const APIURL = "https://api.cloudinary.com/v1_1/dy8inpbdc/image/upload";
 
@@ -70,6 +73,14 @@ class _CameraScreenState extends State<CameraScreen>
                 child: TextButton(
                   onPressed: () async {
                     XFile image = await _controller.takePicture();
+                    File file = File(image.path);
+                    String folderPath =
+                        (await getApplicationDocumentsDirectory()).path;
+                    String fileName = basename(image.path);
+                    Directory("$folderPath/pictures/")
+                        .createSync(recursive: true);
+                    file.copySync(("$folderPath/pictures/$fileName"));
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pictureDetails.dart';
 
 const IMAGES_URL = "https://wildstagram.nausicaa.wilders.dev/list";
 
@@ -51,17 +52,28 @@ class _GalleryScreenState extends State<GalleryScreen>
       padding: const EdgeInsets.all(8),
       itemCount: this._images.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          padding: EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              this._images[index]!,
-              width: double.infinity,
-              fit: BoxFit.fitWidth,
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    PictureDetailsScreen(url: this._images[index] as String),
+              ),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                this._images[index]!,
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         );
